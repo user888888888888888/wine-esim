@@ -6,8 +6,105 @@
   <title>eSIM Market</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09090f;
+      --bg-card: #111218;
+      --bg-card2: #16171f;
+      --bg-input: #0d0e15;
+      --purple: #7c3aed;
+      --purple-light: #9d6cf7;
+      --purple-dim: rgba(124,58,237,0.18);
+      --purple-glow: rgba(124,58,237,0.35);
+      --purple-border: rgba(124,58,237,0.3);
+      --text: #f0f0f8;
+      --text-muted: #6b6d80;
+      --text-sub: #9899a8;
+      --border: rgba(255,255,255,0.07);
+      --danger: #ef4444;
+      --success: #22c55e;
+      --r-card: 20px;
+      --r-btn: 50px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html, body { height:100%; overflow-x:hidden; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size:16px; line-height:1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .screen { display:none; min-height:100vh; padding-bottom:60px; }
+    .screen.active { display:block; }
+    #splash {
+      position:fixed; inset:0; z-index:99999;
+      background: var(--bg);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px;
+      transition: opacity 0.5s ease, visibility 0.5s;
+    }
+    #splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    .splash-logo {
+      width:96px; height:96px; border-radius:24px;
+      background: linear-gradient(135deg,#1a0a35,#0f0820);
+      border:1px solid var(--purple-border);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 0 48px var(--purple-glow);
+    }
+    .splash-logo i { font-size:42px; color:var(--purple-light); }
+    .splash-title { font-size:21px; font-weight:700; color:var(--text); }
+    .splash-spinner {
+      width:26px; height:26px;
+      border:2.5px solid rgba(255,255,255,0.08);
+      border-top-color:var(--purple-light);
+      border-radius:50%;
+      animation:spin 0.85s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .toast {
+      position:fixed; top:16px; left:50%;
+      transform:translateX(-50%) translateY(-80px);
+      background:var(--bg-card2); border:1px solid var(--border);
+      border-radius:50px; padding:12px 20px;
+      display:flex; align-items:center; gap:8px;
+      font-size:13px; font-weight:600; color:var(--text);
+      box-shadow:0 8px 24px rgba(0,0,0,0.5);
+      z-index:9999; transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);
+      white-space:nowrap; max-width:90vw;
+    }
+    .toast.show { transform:translateX(-50%) translateY(0); }
+    .toast.success i { color:var(--success); }
+    .toast.error i { color:var(--danger); }
+    .toast.info i { color:var(--purple-light); }
+    .overlay {
+      position:fixed; inset:0; z-index:200;
+      background:rgba(0,0,0,0.65); backdrop-filter:blur(5px);
+      opacity:0; visibility:hidden;
+      transition:opacity 0.3s, visibility 0.3s;
+    }
+    .overlay.active { opacity:1; visibility:visible; }
+    .sheet {
+      position:fixed; bottom:0; left:0; right:0; z-index:201;
+      background:var(--bg-card);
+      border-radius:28px 28px 0 0;
+      padding:0 20px 48px;
+      border-top:1px solid var(--border);
+      box-shadow:0 -20px 60px rgba(0,0,0,0.7);
+      transform:translateY(100%);
+      transition:transform 0.4s cubic-bezier(0.32,0.72,0,1);
+      max-height:92vh; overflow-y:auto;
+    }
+    .sheet.active { transform:translateY(0); }
+    .sheet-handle {
+      width:40px; height:4px; border-radius:2px;
+      background:rgba(255,255,255,0.14);
+      margin:14px auto 22px;
+    }
+    .sheet-title { font-size:22px; font-weight:800; text-align:center; margin-bottom:6px; }
+    .sheet-sub { font-size:14px; color:var(--text-sub); text-align:center; margin-bottom:22px; }
+  </style>
 </head>
 <body>
-<p>placeholder</p>
+<p style="color:#fff;text-align:center;margin-top:40px;font-family:sans-serif;">Cargando eSIM Market… si ves este mensaje de forma permanente, el archivo no se actualizó correctamente.</p>
 </body>
 </html>
